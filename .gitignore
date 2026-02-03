@@ -35,6 +35,3 @@ packages/hooks/.rollup.cache/
 
 # npm
 .npmrc
-
-# husky
-.husky/
