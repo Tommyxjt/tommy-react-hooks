@@ -29,3 +29,6 @@ Thumbs.db
 # Dumi
 .dumi/tmp
 .dumi/tmp-production
+
+# rollup
+packages/hooks/.rollup.cache/
