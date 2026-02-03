@@ -5,7 +5,7 @@
 
 import React from 'react'; // 这边导入 React 是因为 JSX 需要 React 作用域
 import { Button } from 'antd';
-import { useBoolean } from 'txHooks';
+import { useBoolean } from 'tx-hooks';
 
 export default () => {
   const [state, { toggle, setTrue, setFalse }] = useBoolean(false);

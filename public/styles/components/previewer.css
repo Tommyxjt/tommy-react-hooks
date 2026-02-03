@@ -1,0 +1,7 @@
+.dumi-default-previewer-desc > .markdown {
+  padding: 18px 24px 12px !important;
+  & p {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.45);
+  }
+}

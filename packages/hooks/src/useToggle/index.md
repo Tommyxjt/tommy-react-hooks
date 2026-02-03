@@ -9,11 +9,7 @@ nav:
 
 ## 代码演示
 
-### 基础用法
-
 <code src="./demo/basic.tsx"></code>
-
-### 高级用法
 
 <code src="./demo/advanced.tsx"></code>
 
@@ -36,12 +32,12 @@ const [state, { toggle, set, setLeft, setRight }] = useToggle<T, U>(defaultValue
 
 ### Result
 
-| 参数    | 说明     | 类型      |
-| ------- | -------- | --------- |
-| state   | 状态值   | -         |
-| actions | 操作集合 | `Actions` |
+| 参数    | 说明     | 类型            |
+| ------- | -------- | --------------- |
+| state   | 状态值   | -               |
+| actions | 操作集合 | `ToggleActions` |
 
-### Actions
+### ToggleActions
 
 | 参数     | 说明                                                                            | 类型                      |
 | -------- | ------------------------------------------------------------------------------- | ------------------------- |

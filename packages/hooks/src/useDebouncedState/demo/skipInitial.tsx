@@ -5,7 +5,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { Input, Spin } from 'antd';
-import { useDebouncedState } from 'txHooks';
+import { useDebouncedState } from 'tx-hooks';
 
 /**
  * 模拟异步请求

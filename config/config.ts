@@ -25,7 +25,7 @@ export default {
   manifest: {},
   hash: true,
   alias: {
-    encodeHooks: process.cwd() + '/packages/hooks/src/index.ts',
+    'tx-hooks': `${process.cwd()}/packages/hooks/src/index.ts`,
   },
   resolve: {
     includes: ['docs', 'packages/hooks/src'],

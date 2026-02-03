@@ -1,9 +1,9 @@
-import * as encodeHooks from '..';
+import * as txHooks from '..';
 
-describe('encodeHooks', () => {
+describe('tx-hooks', () => {
   test('exports modules should be defined', () => {
-    Object.keys(encodeHooks).forEach((module) => {
-      expect((encodeHooks as Record<string, any>)[module]).toBeDefined();
+    Object.keys(txHooks).forEach((module) => {
+      expect((txHooks as Record<string, any>)[module]).toBeDefined();
     });
   });
 });

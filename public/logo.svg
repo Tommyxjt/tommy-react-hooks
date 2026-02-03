@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-label="TX Hooks logo">
+  <defs>
+    <linearGradient id="g" x1="40" y1="40" x2="216" y2="216" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1677ff"/>
+      <stop offset="1" stop-color="#13c2c2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background -->
+  <rect x="24" y="24" width="208" height="208" rx="44" fill="url(#g)"/>
+
+  <!-- TX monogram (white) -->
+  <path fill="#fff" d="M74 92h78v18h-30v74h-18v-74H74z"/>
+  <path fill="#fff" d="M142 92h20l18 32 18-32h20l-28 48 30 44h-20l-20-30-20 30h-20l30-44z"/>
+  
+</svg>

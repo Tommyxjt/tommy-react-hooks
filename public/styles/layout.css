@@ -1,0 +1,9 @@
+.dumi-default-header-content,
+.dumi-default-doc-layout > main {
+  max-width: none !important;
+}
+
+.dumi-default-header-left,
+.dumi-default-sidebar {
+  width: 210px !important;
+}

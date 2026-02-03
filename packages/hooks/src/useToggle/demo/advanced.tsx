@@ -1,10 +1,11 @@
 /**
  * title: 在任意两个值之间切换
- * desc: 接受两个可选参数，在它们之间进行切换。
+ * description: 接受两个可选参数，在它们之间进行切换。
  */
 
 import React from 'react';
-import { useToggle } from 'encodeHooks';
+import { Button } from 'antd';
+import { useToggle } from 'tx-hooks';
 
 export default () => {
   const [state, { toggle, setLeft, setRight, set }] = useToggle('Hello', 'World');
@@ -13,21 +14,15 @@ export default () => {
     <div>
       <p>Effects：{state}</p>
       <p>
-        <button type="button" onClick={toggle}>
-          Toggle
-        </button>
-        <button type="button" onClick={() => set('Hello')} style={{ margin: '0 8px' }}>
+        <Button onClick={toggle}>Toggle</Button>
+        <Button onClick={() => set('Hello')} style={{ margin: '0 8px' }}>
           Set Hello
-        </button>
-        <button type="button" onClick={() => set('World')}>
-          Set World
-        </button>
-        <button type="button" onClick={setLeft} style={{ margin: '0 8px' }}>
+        </Button>
+        <Button onClick={() => set('World')}>Set World</Button>
+        <Button onClick={setLeft} style={{ margin: '0 8px' }}>
           Set Left
-        </button>
-        <button type="button" onClick={setRight}>
-          Set Right
-        </button>
+        </Button>
+        <Button onClick={setRight}>Set Right</Button>
       </p>
     </div>
   );

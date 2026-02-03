@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
     "strict": true,
-    "target": "ES5",
+    "target": "es2015",
+    "lib": ["dom", "es2015"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
     "declaration": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -9,10 +12,8 @@
     "baseUrl": ".",
     "paths": {
       "@@/*": [".dumi/tmp/*"],
-      "encodeHooks": ["./packages/hooks/src/index.ts"],
-      "tommy-encode-hooks": ["./packages/hooks/src/index.ts"],
-      "encodeHooks/lib/*": ["./packages/hooks/src/*"],
-      "encode-hooks/lib/*": ["./packages/hooks/src/*"]
+      "tx-hooks": ["./packages/hooks/src/index.ts"],
+      "tx-hooks/lib/*": ["./packages/hooks/src/*"]
     },
     "importHelpers": true
   },

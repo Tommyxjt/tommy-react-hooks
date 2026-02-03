@@ -5,7 +5,7 @@
 
 import React from 'react'; // 这边导入 React 是因为 JSX 需要 React 作用域
 import { Input } from 'antd';
-import { useDebouncedState } from 'txHooks';
+import { useDebouncedState } from 'tx-hooks';
 
 export default () => {
   const [value, setValue, debouncedValue] = useDebouncedState('', {

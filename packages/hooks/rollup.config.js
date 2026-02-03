@@ -36,6 +36,34 @@ const formats = {
   umd: 'dist',
 };
 
+// 通用插件数组
+const commonPlugins = [
+  // 自动排除package.json中的peerDependencies
+  // 这行配置很重要，避免将peerDependencies打包进最终bundle
+  peerDepsExternal(),
+  resolve(),
+  commonjs(),
+  typescript({
+    tsconfig: './tsconfig.json',
+    // 关键：不生成声明文件
+    // 因为 @rollup/plugin-typescript 会为每个源文件生成对应的 .d.ts
+    // 无法做到将所有类型合并到一个文件
+    // 需要用 rollup-plugin-dts 生成单个声明文件，然后复制到对应目录
+    declaration: false,
+    declarationDir: null,
+  }),
+  babel({
+    babelHelpers: 'bundled',
+    extensions: ['.ts', '.tsx'],
+    exclude: 'node_modules/**',
+    presets: [
+      '@babel/preset-env',
+      '@babel/preset-typescript',
+      ['@babel/preset-react', { runtime: 'automatic' }],
+    ],
+  }),
+];
+
 // 生成多个输出配置
 const buildConfigs = Object.entries(formats).map(([format, dir]) => ({
   // 入口文件路径
@@ -73,30 +101,7 @@ const buildConfigs = Object.entries(formats).map(([format, dir]) => ({
 
   // 插件配置数组
   plugins: [
-    // 自动排除package.json中的peerDependencies
-    // 这行配置很重要，避免将peerDependencies打包进最终bundle
-    peerDepsExternal(),
-    resolve(),
-    commonjs(),
-    typescript({
-      tsconfig: './tsconfig.json',
-      // 关键：不生成声明文件
-      // 因为 @rollup/plugin-typescript 会为每个源文件生成对应的 .d.ts
-      // 无法做到将所有类型合并到一个文件
-      // 需要用 rollup-plugin-dts 生成单个声明文件，然后复制到对应目录
-      declaration: false,
-      declarationDir: null,
-    }),
-    babel({
-      babelHelpers: 'bundled', // Babel helpers 打包方式
-      extensions: ['.ts', '.tsx'], // 处理的文件扩展名
-      exclude: 'node_modules/**',
-      presets: [
-        '@babel/preset-env', // ES6+ 转 ES5
-        '@babel/preset-typescript', // TypeScript支持
-        ['@babel/preset-react', { runtime: 'automatic' }], // React 中使用 jsx 运行时
-      ],
-    }),
+    ...commonPlugins,
 
     // 只有UMD格式才使用压缩插件
     // 这行配置很重要，可以减少生产环境包体积
