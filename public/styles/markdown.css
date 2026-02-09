@@ -11,3 +11,17 @@
   color: #454d64;
   font-weight: 500 !important;
 }
+
+.markdown hr {
+  width: 100% !important;
+}
+
+.markdown blockquote {
+  font-style: normal !important;
+  background-color: #fffbe6 !important;
+  border-left: 5px solid #ffad14 !important;
+}
+
+.markdown blockquote > p {
+  margin-block-end: 1em !important;
+}

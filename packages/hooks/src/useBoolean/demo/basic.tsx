@@ -15,8 +15,8 @@ export default () => {
       <p>Effects：{`${state}`}</p>
       <p style={{ display: 'flex', gap: 8 }}>
         <Button onClick={toggle}>Toggle</Button>
-        <Button onClick={setTrue}>setTrue</Button>
-        <Button onClick={setFalse}>setFalse</Button>
+        <Button onClick={setTrue}>Set True</Button>
+        <Button onClick={setFalse}>Set False</Button>
       </p>
     </div>
   );

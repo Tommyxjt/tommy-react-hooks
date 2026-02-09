@@ -7,9 +7,13 @@ nav:
 
 用于在两个布尔值间切换的 Hook。
 
+---
+
 ## 代码演示
 
 <code src="./demo/basic.tsx"></code>
+
+---
 
 ## API
 

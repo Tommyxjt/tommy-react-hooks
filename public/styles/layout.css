@@ -7,3 +7,18 @@
 .dumi-default-sidebar {
   width: 210px !important;
 }
+
+.dumi-default-sidebar > dl > dt {
+  font-size: 16px !important;
+  text-transform: none !important;
+  margin: 8px 0 10px !important;
+}
+
+.dumi-default-sidebar > dl > dd {
+  margin-left: 8px !important;
+  padding: 6px 0 !important;
+}
+
+.dumi-default-sidebar > dl > dd > a {
+  font-size: 14px !important;
+}
