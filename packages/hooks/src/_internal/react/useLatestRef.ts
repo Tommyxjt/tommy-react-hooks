@@ -12,3 +12,5 @@ export function useLatestRef<T>(value: T) {
   ref.current = value;
   return ref;
 }
+
+export default useLatestRef;

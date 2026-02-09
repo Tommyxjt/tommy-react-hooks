@@ -13,3 +13,5 @@ export function useUnmount(fn: () => void) {
   // cleanup 在 unmount 时执行
   useEffect(() => () => fnRef.current(), []);
 }
+
+export default useUnmount;
