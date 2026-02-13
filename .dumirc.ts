@@ -3,6 +3,18 @@ import path from 'path';
 import webpackChain from 'webpack-chain';
 import sidebar from './.dumi/config/sidebar';
 
+// rehype-mermaid 是 ESM 包，
+// 而 dumi/umi 在加载 .dumirc.ts 时走的是 CommonJS 的 require()，
+// 需要用一个 CJS 包装器在 transformer 里 import() ESM 插件
+function rehypeMermaidLazy(options: any) {
+  return async (tree: any, file: any) => {
+    const mod = await import('rehype-mermaid');
+    const rehypeMermaid = (mod as any).default ?? mod;
+    const transformer = rehypeMermaid(options);
+    return transformer(tree, file);
+  };
+}
+
 export default defineConfig({
   styles: ['/styles/index.css'],
   // webpack 配置
@@ -14,6 +26,7 @@ export default defineConfig({
       .loader(path.resolve(__dirname, './loader/insert-toc-loader.cjs'))
       .end();
   },
+  extraRehypePlugins: [[rehypeMermaidLazy, { strategy: 'inline-svg' }]],
   resolve: {
     // 设置文档源目录
     docDirs: ['docs'],
@@ -24,6 +37,9 @@ export default defineConfig({
 
       // 专门让 dumi 识别 useDebounce/docs 下的一层 md
       { type: 'hook', dir: 'packages/hooks/src/useDebounce/docs' },
+
+      // 专门让 dumi 识别 useRaf/docs 下的一层 md
+      { type: 'hook', dir: 'packages/hooks/src/useRaf/docs' },
     ],
     codeBlockMode: 'passive',
   },
@@ -33,6 +49,7 @@ export default defineConfig({
     name: 'TX Hooks',
     logo: '/logo.svg',
     favicon: '/favicon.ico',
+    prefersColor: { default: 'light', switch: false },
     nav: [
       { title: '指南', link: '/guide' },
       {
@@ -45,7 +62,6 @@ export default defineConfig({
     footer: 'Copyright © 2025-present Tommy Xu',
   },
   alias: {
-    '@': '/packages/hooks/src',
-    '@tx-labs/react-hooks': '/packages/hooks/src/index.ts',
+    '@tx-labs/react-hooks$': path.resolve(__dirname, 'packages/hooks/src/index.ts'),
   },
 });

@@ -5,7 +5,11 @@
 
 .dumi-default-header-left,
 .dumi-default-sidebar {
-  width: 210px !important;
+  width: 215px !important;
+}
+
+.dumi-default-sidebar {
+  padding-inline-end: 27px !important;
 }
 
 .dumi-default-sidebar > dl > dt {
