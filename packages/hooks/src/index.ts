@@ -9,6 +9,7 @@ import useIsMounted from './useIsMounted';
 import useToggle from './useToggle';
 import useBoolean from './useBoolean';
 import useSafeSetState from './useSafeSetState';
+import usePrevious from './usePrevious';
 
 // useDebounce 系列钩子
 import useDebouncedState from './useDebounce/hooks/useDebouncedState';
@@ -45,6 +46,7 @@ export {
   useToggle,
   useBoolean,
   useSafeSetState,
+  usePrevious,
 
   // useDebounce 系列钩子
   useDebounceController,
