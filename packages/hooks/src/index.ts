@@ -11,6 +11,7 @@ import useBoolean from './useBoolean';
 import useSafeSetState from './useSafeSetState';
 import usePrevious from './usePrevious';
 import useMergeState from './useMergeState';
+import useMap from './useMap';
 
 // useDebounce 系列钩子
 import useDebouncedState from './useDebounce/hooks/useDebouncedState';
@@ -49,6 +50,7 @@ export {
   useSafeSetState,
   usePrevious,
   useMergeState,
+  useMap,
 
   // useDebounce 系列钩子
   useDebounceController,
