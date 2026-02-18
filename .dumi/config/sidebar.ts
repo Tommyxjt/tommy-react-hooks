@@ -39,6 +39,7 @@ export default {
       'useMergeState',
       'useMap',
       'useSet',
+      'useArray',
     ]),
     group('useDebounce 系列', [
       'useDebouncedState',
