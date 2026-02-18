@@ -112,17 +112,18 @@ const map = useMap<K, V>(initial?, { mode: 'mutable' });
 
 返回一个 Map-like 对象（调用方式接近原生 Map）。两种模式共享以下能力：
 
-| 方法/属性           | 说明                             | 类型                                                              |
-| ------------------- | -------------------------------- | ----------------------------------------------------------------- |
-| `size`              | 条目数                           | `number`                                                          |
-| `get(key)`          | 获取值                           | `(key: K) => V \| undefined`                                      |
-| `has(key)`          | 是否存在                         | `(key: K) => boolean`                                             |
-| `set(key, value)`   | 设置键值（支持链式调用）         | `(key: K, value: V) => MapLike<K, V>`                             |
-| `delete(key)`       | 删除键                           | `(key: K) => boolean`                                             |
-| `clear()`           | 清空                             | `() => void`                                                      |
-| `batchSet(entries)` | 批量增量写入（patch/merge 语义） | `(entries: Iterable<readonly [K, V]>) => MapLike<K, V>`           |
-| `replace(next)`     | 整体替换（replace 语义）         | `(next: Map<K, V> \| Iterable<readonly [K, V]>) => MapLike<K, V>` |
-| `reset()`           | 重置到初始快照                   | `() => MapLike<K, V>`                                             |
+| 方法/属性               | 说明                                               | 类型                                                              |
+| ----------------------- | -------------------------------------------------- | ----------------------------------------------------------------- |
+| `size`                  | 条目数                                             | `number`                                                          |
+| `get(key)`              | 获取值                                             | `(key: K) => V \| undefined`                                      |
+| `has(key)`              | 是否存在                                           | `(key: K) => boolean`                                             |
+| `set(key, value)`       | 设置键值（支持链式调用）                           | `(key: K, value: V) => MapLike<K, V>`                             |
+| `compute(key, updater)` | 基于旧值计算并写回；不存在时 `prev` 为 `undefined` | `(key: K, updater: (prev: V \| undefined) => V) => V`             |
+| `delete(key)`           | 删除键                                             | `(key: K) => boolean`                                             |
+| `clear()`               | 清空                                               | `() => void`                                                      |
+| `batchSet(entries)`     | 批量增量写入（patch/merge 语义）                   | `(entries: Iterable<readonly [K, V]>) => MapLike<K, V>`           |
+| `replace(next)`         | 整体替换（replace 语义）                           | `(next: Map<K, V> \| Iterable<readonly [K, V]>) => MapLike<K, V>` |
+| `reset()`               | 重置到初始快照                                     | `() => MapLike<K, V>`                                             |
 
 ---
 

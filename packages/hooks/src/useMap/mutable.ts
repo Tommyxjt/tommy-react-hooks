@@ -4,6 +4,10 @@ import { toMap, type ResolvedInit } from './utils';
 
 export type MutableReactiveMap<K, V> = ReadonlyMap<K, V> & {
   set: (key: K, value: V) => MutableReactiveMap<K, V>;
+  /**
+   * 初始化或者更新：将 prev 的值传入 updater，根据 prev 是不是 undefined 返回初始值 / 更新值
+   */
+  compute: (key: K, updater: (prev: V | undefined) => V) => V;
   delete: (key: K) => boolean;
   clear: () => void;
 
@@ -88,6 +92,27 @@ export default function useMapMutable<K, V>(
         bump();
         return receiver as MutableReactiveMap<K, V>;
       };
+      cache.set(prop, fn);
+      return fn;
+    }
+
+    if (prop === 'compute') {
+      const fn = (key: K, updater: (prev: V | undefined) => V) => {
+        const cur = mapRef.current;
+
+        const hasKey = cur.has(key);
+        const prev = hasKey ? (cur.get(key) as V) : undefined;
+
+        const nextValue = updater(prev);
+
+        // 仅当 key 已存在且值没变化时 no-op（不 bump version）
+        if (hasKey && Object.is(prev, nextValue)) return nextValue;
+
+        cur.set(key, nextValue);
+        bump();
+        return nextValue;
+      };
+
       cache.set(prop, fn);
       return fn;
     }

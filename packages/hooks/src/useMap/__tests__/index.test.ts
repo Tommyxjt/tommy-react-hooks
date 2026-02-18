@@ -372,4 +372,62 @@ describe('useMap', () => {
 
     expect(Array.from(result.current)).toEqual(entries);
   });
+
+  //  17）immutable：compute 应支持“无则初始化，有则基于旧值更新”，并返回计算后的新值
+  it('should compute next value based on previous value in immutable mode', () => {
+    const { result } = renderHook(() => useMap<string, number>([['a', 1]], { mode: 'immutable' }));
+
+    let v1 = 0;
+    act(() => {
+      v1 = (result.current as any).compute('a', (v: number | undefined) => (v ?? 0) + 1);
+    });
+    expect(v1).toBe(2);
+    expect(result.current.get('a')).toBe(2);
+
+    let v2 = 0;
+    act(() => {
+      v2 = (result.current as any).compute('b', (v: number | undefined) => (v ?? 0) + 5);
+    });
+    expect(v2).toBe(5);
+    expect(result.current.get('b')).toBe(5);
+  });
+
+  //  18）immutable：compute 计算结果不变时应 no-op（引用不变）
+  it('should be a no-op when compute returns the same value in immutable mode', () => {
+    const { result } = renderHook(() => useMap<string, number>([['a', 1]], { mode: 'immutable' }));
+
+    const ref = result.current;
+
+    let v = 0;
+    act(() => {
+      v = (result.current as any).compute('a', (prev: number | undefined) => prev as number);
+    });
+
+    expect(v).toBe(1);
+    expect(result.current.get('a')).toBe(1);
+    expect(result.current).toBe(ref);
+  });
+
+  //  19）mutable：compute 变化时应 bump version，不变时不 bump
+  it('should bump version on compute changes and not bump on no-op in mutable mode', () => {
+    const { result } = renderHook(() => useMap<string, number>([['a', 1]], { mode: 'mutable' }));
+
+    const v0 = (result.current as any).getVersion();
+    expect(v0).toBe(0);
+
+    let v1 = 0;
+    act(() => {
+      v1 = (result.current as any).compute('a', (v: number | undefined) => (v ?? 0) + 1);
+    });
+    expect(v1).toBe(2);
+    expect(result.current.get('a')).toBe(2);
+    expect((result.current as any).getVersion()).toBe(1);
+
+    let v2 = 0;
+    act(() => {
+      v2 = (result.current as any).compute('a', (prev: number | undefined) => prev as number);
+    });
+    expect(v2).toBe(2);
+    expect((result.current as any).getVersion()).toBe(1);
+  });
 });

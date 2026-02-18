@@ -4,6 +4,10 @@ import { toMap, type ResolvedInit } from './utils';
 
 export type ImmutableReactiveMap<K, V> = ReadonlyMap<K, V> & {
   set: (key: K, value: V) => ImmutableReactiveMap<K, V>;
+  /**
+   * 初始化或者更新：将 prev 的值传入 updater，根据 prev 是不是 undefined 返回初始值 / 更新值
+   */
+  compute: (key: K, updater: (prev: V | undefined) => V) => V;
   delete: (key: K) => boolean;
   clear: () => void;
 
@@ -72,6 +76,28 @@ export default function useMapImmutable<K, V>(
             commit(next);
 
             return receiver as ImmutableReactiveMap<K, V>;
+          };
+          cache.set(prop, fn);
+          return fn;
+        }
+
+        if (prop === 'compute') {
+          const fn = (key: K, updater: (prev: V | undefined) => V) => {
+            const cur = latestRef.current;
+
+            const hasKey = cur.has(key);
+            const prev = hasKey ? (cur.get(key) as V) : undefined;
+
+            const nextValue = updater(prev);
+
+            // 仅当 key 已存在且值没变化时 no-op（保持引用不变）
+            if (hasKey && Object.is(prev, nextValue)) return nextValue;
+
+            const next = new Map(cur);
+            next.set(key, nextValue);
+            commit(next);
+
+            return nextValue;
           };
           cache.set(prop, fn);
           return fn;
