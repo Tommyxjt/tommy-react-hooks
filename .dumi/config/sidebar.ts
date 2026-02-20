@@ -41,6 +41,7 @@ export default {
       'useSet',
       'useArray',
     ]),
+    group('useEventBus 系列', ['createEventBus', 'useEventBus']),
     group('useDebounce 系列', [
       'useDebouncedState',
       'useDebouncedClick',

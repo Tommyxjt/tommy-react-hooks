@@ -35,6 +35,9 @@ export default defineConfig({
     atomDirs: [
       { type: 'hook', dir: 'packages/hooks/src' },
 
+      // 专门让 dumi 识别 useEventBus/docs 下的一层 md
+      { type: 'hook', dir: 'packages/hooks/src/useEventBus/docs' },
+
       // 专门让 dumi 识别 useDebounce/docs 下的一层 md
       { type: 'hook', dir: 'packages/hooks/src/useDebounce/docs' },
 

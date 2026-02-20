@@ -15,6 +15,10 @@ import useMap from './useMap';
 import useSet from './useSet';
 import useArray from './useArray';
 
+// useEventBus 系列钩子
+import createEventBus from './useEventBus/hooks/createEventBus';
+import useEventBus from './useEventBus/hooks/useEventBus';
+
 // useDebounce 系列钩子
 import useDebouncedState from './useDebounce/hooks/useDebouncedState';
 import useDebouncedClick from './useDebounce/hooks/useDebouncedClick';
@@ -55,6 +59,10 @@ export {
   useMap,
   useSet,
   useArray,
+
+  // useEventBus 系列钩子
+  createEventBus,
+  useEventBus,
 
   // useDebounce 系列钩子
   useDebounceController,
